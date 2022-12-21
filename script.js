@@ -3,8 +3,7 @@ const path = require("path");
 
 function createComponentFiles(componentName) {
   const dirPath = `./src/Components/${componentName}`;
-  const boilerplate = `
-  import React from 'react'
+  const boilerplate = `import React from 'react'
   import './${componentName}.css'
   
   export const ${componentName} = () => {
@@ -22,3 +21,6 @@ function createComponentFiles(componentName) {
 for (let i = 2; i < process.argv.length; i++) {
   createComponentFiles(process.argv[i]);
 }
+
+/////////////////////////////
+// setCountryInfo({...countryInfo, [e.target.id]: e.target.value})

@@ -17,6 +17,8 @@ export const Signup = () => {
     }
   };
 
+  console.log("Signup rendered");
+
   return (
     <div className="login-signup-form-container">
       <div className="form-header">Sign Up</div>
@@ -30,7 +32,7 @@ export const Signup = () => {
         <button>Sign Up</button>
       </form>
       <div className="form-footer">
-        Already have an account? <Link to="/login">Login</Link>
+        Already have an account? <Link to="/home/login">Login</Link>
       </div>
     </div>
   );

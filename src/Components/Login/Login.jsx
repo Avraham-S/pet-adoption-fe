@@ -12,7 +12,7 @@ export const Login = () => {
         <button>Login</button>
       </form>
       <div className="form-footer">
-        New user? <Link to="/signup">Create account</Link>
+        New user? <Link to="/home/signup">Create account</Link>
       </div>
     </div>
   );
