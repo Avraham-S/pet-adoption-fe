@@ -11,29 +11,52 @@ export const PetPage = () => {
 
   const getPetData = async () => {
     const res = await axios.get(PET_URL + id);
-    console.log(res);
     setPet(res.data);
   };
 
   useEffect(() => {
     getPetData();
-    console.log(pet);
   }, []);
 
   if (!pet) return;
   return (
-    <div>
-      <img src="" alt="" />
-      <div>Name: {pet.name}</div>
-      <div>Type: {pet.type}</div>
-      <div>Availabilty: {pet.adoptionStatus}</div>
-      <div>Height: {pet.height}</div>
-      <div>Weight: {pet.weight}</div>
-      <div>Color: {pet.color}</div>
-      <div>Bio: {pet.bio}</div>
-      <div>Hypoalergenic: {pet.hypoalergenic ? "yes" : "no"}</div>
-      <div>Dietary Restrictions: {pet.dietary}</div>
-      <div>Breed: {pet.breed}</div>
+    <div id="pet-page-container">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmtG1aTa9RLWZjJiw7nct27KOB_RjHkSz0aWNKCpGv&s"
+        alt=""
+      />
+      <div id="pet-details">
+        <div className="pet-detail">
+          Name: <span>{pet.name}</span>
+        </div>
+        <div className="pet-detail">
+          Type: <span>{pet.type}</span>
+        </div>
+        <div className="pet-detail">
+          Availabilty: <span>{pet.adoptionStatus}</span>
+        </div>
+        <div className="pet-detail">
+          Height: <span>{pet.height}</span>
+        </div>
+        <div className="pet-detail">
+          Weight: <span>{pet.weight}</span>
+        </div>
+        <div className="pet-detail">
+          Color: <span>{pet.color}</span>
+        </div>
+        <div className="pet-detail">
+          Bio: <span>{pet.bio}</span>
+        </div>
+        <div className="pet-detail">
+          Hypoalergenic: <span>{pet.hypoalergenic ? "yes" : "no"}</span>
+        </div>
+        <div className="pet-detail">
+          Dietary Restrictions: <span>{pet.dietary}</span>
+        </div>
+        <div className="pet-detail">
+          Breed: <span>{pet.breed}</span>
+        </div>
+      </div>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { Route, Routes, Link } from "react-router-dom";
 import "./Home.css";
 import { Login } from "../Login/Login";
 import { Signup } from "../Signup/Signup";
-import { Header } from "../Header/Header";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
+import { Header } from "../Header/Header";
 
 const signupButtonContainerStyle = {
   display: "flex",
@@ -13,14 +13,13 @@ const signupButtonContainerStyle = {
   alignItems: "center",
 };
 
-export const Home = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
+export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
+  // const [isOpenModal, setIsOpenModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
 
-  const toggleModal = () => {
-    setIsOpenModal(!isOpenModal);
-  };
+  // const toggleModal = () => {
+  //   setIsOpenModal(!isOpenModal);
+  // };
 
   return (
     <div>
@@ -45,23 +44,19 @@ export const Home = () => {
       </button>
       <div id="main">
         <div>
-          {
-            "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim ipsumeaque fuga sunt dolorum praesentium architecto nam! Laudantium eavoluptatem voluptas modi deleniti aliquam illum assumendaexercitationem qui vitae! Veniam! \n Lorem ipsum dolor sit ametconsectetur, adipisicing elit. Quis, quaerat architecto natus laborum ut corrupti! Ipsum placeat enim omnis ea consequatur necessitatibus     \n     officiis alias autem, quidem, eligendi, \n laudantium blanditii asperiores. Lorem ipsum dolor sit amet consectetur adipisicing elit.          Voluptates iusto nam et fugit temporibus reprehenderit, culpa quis,   quisquam beatae ullam cupiditate enim ipsum nostrum! Porro dolorum eius aut maiores consectetur."
-          }
+          Welcome to our pet adoption website! We are dedicated to finding
+          loving homes for animals in need. We have a variety of animals
+          available for adoption, including cats, dogs, and small mammals. All
+          of our pets have been rescued and are looking for a second chance at a
+          happy life. By adopting a pet from us, you are not only giving a
+          deserving animal a home, but also supporting our efforts to rescue and
+          care for more animals. Thank you for considering adoption and for your
+          support of our mission. We hope you find the perfect companion here!
         </div>
         {isLoggedIn || (
           <div style={signupButtonContainerStyle}>
-            <Link to="signup">
-              <button id="signup-button" onClick={toggleModal}>
-                Sign Up
-              </button>
-            </Link>
-            <div>
-              Already have an account?{" "}
-              <Link to="login" onClick={toggleModal}>
-                Login
-              </Link>
-            </div>
+            <Link to="signup" onClick={toggleModal} ref={signupRef} />
+            <Link to="login" onClick={toggleModal} ref={loginRef} />
           </div>
         )}
       </div>

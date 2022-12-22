@@ -1,15 +1,26 @@
-.modal {
+/* .modal {
   position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
+  z-index: 1;
   justify-content: center;
   background-color: rgba(84, 83, 83, 0.306);
   backdrop-filter: blur(0.4px);
+} */
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rem;
+  border: 2px solid #000;
+  box-shadow: 24;
 }
 
 .modal-content {
   background-color: white;
-  width: 35%;
+  width: 100%;
 }

@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=Alkalami&family=Open+Sans:wght@300&family=Patrick+Hand&family=Poppins:wght@200&family=Roboto:wght@300&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Alegreya Sans", sans-serif;
 }
 
 body,

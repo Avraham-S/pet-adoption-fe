@@ -23,4 +23,4 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 
 /////////////////////////////
-// setCountryInfo({...countryInfo, [e.target.id]: e.target.value})
+// setStateInfo({...prevState, [e.target.id]: e.target.value})

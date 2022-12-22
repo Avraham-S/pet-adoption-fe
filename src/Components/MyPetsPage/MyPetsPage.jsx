@@ -19,7 +19,7 @@ export const MyPetsPage = () => {
   }, []);
 
   return (
-    <div>
+    <div id="card-container">
       {petsList.map((pet) => (
         <PetCard
           name={pet.name}
