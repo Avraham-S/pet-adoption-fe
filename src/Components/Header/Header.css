@@ -4,8 +4,29 @@
   padding: 3px;
   text-align: center;
   border-radius: 10px;
+
+  height: fit-content;
 }
 
 .signin-button:hover {
-  background-color: rgb(0, 123, 184);
+  /* text-decoration: underline; */
+  color: rgba(100, 58, 228, 0.733);
+}
+#header {
+  height: fit-content;
+  background-color: #00bfff;
+  font-size: 1rem;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 3px;
+}
+#login-buttons-container {
+  display: flex;
+  font-size: 1.2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }

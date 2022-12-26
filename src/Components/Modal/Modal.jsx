@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Modal.css";
 
 export const Modal = ({ children, isOpen, toggleModal }) => {
+  const navigate = useNavigate();
   return (
     <>
       {isOpen && (
@@ -9,6 +11,7 @@ export const Modal = ({ children, isOpen, toggleModal }) => {
           className="modal"
           onClick={(e) => {
             if (!e.target.classList.contains("modal")) return;
+            navigate("/home/*");
             toggleModal();
           }}
         >

@@ -18,7 +18,6 @@ function App() {
   const loginRef = useRef();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
 
   const toggleModal = () => {
     setIsOpenModal(!isOpenModal);

@@ -1,0 +1,24 @@
+#navbar {
+  /* height: 3rem; */
+  font-size: 1.5rem;
+  background-color: #0198b6;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+  box-shadow: 0 0 2px;
+  border: 1px solid #027389;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: 0.2s ease-in-out;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item:hover {
+  background-color: #00aaff;
+}

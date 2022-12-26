@@ -1,16 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 
 export const Navbar = () => {
+  const [isLoggedIn] = useLoggedIn();
   return (
-    <div>
-      <Link to="/myPets">My Pets</Link>
-      {"      "}
-      <Link to="/profileSettings">Edit Profile</Link>
-      {"      "}
-
-      <Link to="/home">Home</Link>
+    <div id="navbar">
+      {isLoggedIn && (
+        <>
+          <Link to="/home" className="nav-item">
+            Home
+          </Link>
+          <Link to="/myPets" className="nav-item">
+            My Pets
+          </Link>
+          <Link to="/profileSettings" className="nav-item">
+            Edit Profile
+          </Link>
+        </>
+      )}
     </div>
   );
 };

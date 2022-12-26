@@ -20,7 +20,7 @@ export const MyPetsPage = () => {
 
   return (
     <div id="card-container">
-      {petsList.map((pet) => (
+      {petsList.slice(0, 15).map((pet) => (
         <PetCard
           name={pet.name}
           status={pet.adoptionStatus}

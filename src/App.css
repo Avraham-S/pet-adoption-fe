@@ -10,4 +10,5 @@
 body,
 html {
   height: 100vh;
+  background-color: rgba(165, 193, 218, 0.659);
 }

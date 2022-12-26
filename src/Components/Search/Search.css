@@ -1,0 +1,28 @@
+#search-form-container {
+  width: 45rem;
+}
+
+#search-form {
+  display: flex;
+  width: 100%;
+}
+
+#search-form input {
+  flex-grow: 1;
+  font-size: 1.5rem;
+  padding: 0.3rem;
+}
+
+#search-form button {
+  background-color: #0d9cf1;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+#search-form button:hover {
+  background-color: #08659b;
+}
+
+#search-results {
+  height: 40rem;
+}

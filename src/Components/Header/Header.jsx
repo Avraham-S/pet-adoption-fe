@@ -5,19 +5,11 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import companyLogoBlack from "../../resources/pawsitive-adoption-low-resolution-logo-black-on-transparent-background.png";
 import companyLogoWhite from "../../resources/pawsitive-adoption-low-resolution-logo-white-on-transparent-background.png";
 
-export const Header = ({ signupRef, loginRef, toggleModal }) => {
+export const Header = ({ signupRef, loginRef }) => {
   const [isLoggedIn] = useLoggedIn();
-  const style = {
-    height: "fit-content",
-    backgroundColor: "#00aaff",
-    fontSize: "1rem",
-    display: "flex",
-    padding: "0.5rem",
-    alignItems: "center",
-    justifyContent: "space-between",
-  };
+
   return (
-    <div style={style}>
+    <div id="header">
       <div style={{ display: "flex", alignItems: "center" }}>
         <img
           src={companyLogoBlack}
@@ -33,14 +25,27 @@ export const Header = ({ signupRef, loginRef, toggleModal }) => {
             fontSize: "3rem",
           }}
         >
-          Pawsitive Adoptions
+          <div>Pawsitive Adoptions</div>
+          <div style={{ fontSize: "1rem", textAlign: "start" }}>
+            Helping paws, one adoption at a time
+          </div>
         </div>
       </div>
-      <div>
+
+      <div
+        style={{
+          height: "5rem",
+          borderLeft: "1.1px solid gray",
+          padding: "0 0.2rem",
+          display: "flex",
+          alignItems: "center",
+          fontSize: "1rem",
+        }}
+      >
         {isLoggedIn ? (
           "Welcome, username"
         ) : (
-          <div>
+          <div id="login-buttons-container">
             <div
               onClick={() => {
                 signupRef.current.click();
@@ -59,10 +64,6 @@ export const Header = ({ signupRef, loginRef, toggleModal }) => {
             </div>
           </div>
         )}
-        {/* <div>
-          <Link to="signup" onClick={toggleModal} ref={signupRef} />
-          <Link to="login" onClick={toggleModal} ref={loginRef} />
-        </div> */}
       </div>
     </div>
   );

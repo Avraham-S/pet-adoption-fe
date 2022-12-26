@@ -8,9 +8,54 @@
   width: 5em;
 }
 
-#main {
-  font-size: 1.3rem;
-  padding: 0 10rem;
+#background-image {
+  background-image: url("../../resources/andrew-s-ouo1hbizWwo-unsplash.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 30rem;
+}
+#image-area {
+  background-color: rgba(0, 0, 0, 0.551);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: 700;
+  font-size: 5rem;
+  height: 100%;
+  gap: 2rem;
+  border-bottom: 2rem solid #0098b6;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.594);
+  padding: 1rem;
+}
+
+#search-page-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 2rem;
+  background-color: #0291d8;
+  padding: 1rem;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgb(94, 94, 94);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.514);
+}
+#search-page-button:hover {
+  background-color: #0af;
+  color: aliceblue;
+  box-shadow: 0 0 10px black;
+}
+
+#about-paragraph {
+  background-color: rgba(240, 248, 255, 0.724);
+  font-size: 1.5rem;
+  padding: 1rem 5rem;
+  margin: 3rem 0 0 0;
+  box-shadow: 0 0 3px gray;
 }
 
 .login-signup-form-container {

@@ -3,10 +3,20 @@
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: 15rem;
+  border-radius: 5px;
 }
 
 .see-more-link {
   text-decoration: none;
   color: blue;
+}
+
+.pet-info {
+  /* background-color: lightgray; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 3px;
 }
