@@ -9,18 +9,33 @@
 
 #search-form input {
   flex-grow: 1;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0.3rem;
+  outline: none;
+  border-radius: 5px 0 0 5px;
+  border: 1px solid grey;
 }
 
-#search-form button {
+#submit-search-button {
   background-color: #0d9cf1;
   cursor: pointer;
   transition: 0.1s ease-in-out;
+  border: 1px solid grey;
+  border-left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+  padding: 3px;
+  border-radius: 0 5px 5px 0;
 }
 
-#search-form button:hover {
+#submit-search-button:hover {
   background-color: #08659b;
+}
+#submit-search-button img {
+  height: 1.3rem;
+  width: 1.3rem;
 }
 
 #search-results {

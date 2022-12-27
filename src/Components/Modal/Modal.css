@@ -15,14 +15,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 20rem;
   min-width: fit-content;
-  /* height: 100%; */
   border: 2px solid #000;
   box-shadow: 24;
-}
-
-.modal-content {
-  background-color: white;
-  width: 100%;
+  border-radius: 7px;
+  background-color: #eff8ff;
 }

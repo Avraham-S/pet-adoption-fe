@@ -37,6 +37,7 @@ export const PetCard = ({ name, status, id }) => {
             borderRadius: "10px",
             width: "fit-content",
             padding: "3px",
+            boxShadow: "0 0 5px",
             fontSize: "1.3em",
           }}
         >

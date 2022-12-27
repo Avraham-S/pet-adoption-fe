@@ -1,9 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import "./Signup.css";
 
-export const Signup = () => {
+export const Signup = ({ toggleModal }) => {
   const [userInfo, setUserInfo] = useState({});
+  const [, setIsLoggedIn] = useLoggedIn();
   const passwordInput = useRef();
   const confirmPasswordInput = useRef();
 
@@ -11,21 +14,31 @@ export const Signup = () => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const signup = async () => {
     try {
-      e.preventDefault();
-      console.log(passwordInput, confirmPasswordInput);
-
-      if (passwordInput.current.value !== confirmPasswordInput.current.value)
-        throw Error("Passwords dont match");
-
-      console.log("Signed Up");
+      const { data } = await axios.post(
+        "http://localhost:8080/users/signup",
+        userInfo
+      );
+      setIsLoggedIn(data);
+      toggleModal();
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log("Signup rendered");
+  const handleSubmit = (e) => {
+    try {
+      e.preventDefault();
+      console.log(userInfo);
+      if (passwordInput.current.value !== confirmPasswordInput.current.value)
+        throw Error("Passwords dont match");
+      signup();
+      console.log("Signed Up");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="login-signup-form-container">
@@ -35,23 +48,30 @@ export const Signup = () => {
         onChange={handleChange}
         className="login-signup-form"
       >
-        <input type="text" placeholder="First Name" name="firstName" required />
-        <input type="text" placeholder="Last Name" name="lastName" required />
-        <input type="tel" placeholder="Phone" name="phone" required />
-        <input type="email" placeholder="Email" name="email" required />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          ref={passwordInput}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          ref={confirmPasswordInput}
-          required
-        />
+        <div className="input-container">
+          <label htmlFor="">First Name</label>
+          <input type="text" name="firstName" required />
+        </div>
+        <div className="input-container">
+          <label htmlFor="">Last Name</label>
+          <input type="text" name="lastName" required />
+        </div>
+        <div className="input-container">
+          <label htmlFor="">Phone Number</label>
+          <input type="tel" name="phone" required />
+        </div>
+        <div className="input-container">
+          <label htmlFor="">Email</label>
+          <input type="email" name="email" required />
+        </div>
+        <div className="input-container">
+          <label htmlFor="">Password</label>
+          <input type="password" name="password" ref={passwordInput} required />
+        </div>
+        <div className="input-container">
+          <label htmlFor="">Confirm Password</label>
+          <input type="password" ref={confirmPasswordInput} required />
+        </div>
         <button>Sign Up</button>
       </form>
       <div className="form-footer">

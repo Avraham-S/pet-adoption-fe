@@ -1,5 +1,11 @@
 import React, { useRef } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { Home } from "./Components/Home/Home";
 import { ProfileSettings } from "./Components/ProfileSettings/ProfileSettings";
 import "./App.css";
@@ -8,19 +14,17 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { MyPetsPage } from "./Components/MyPetsPage/MyPetsPage";
 import { Header } from "./Components/Header/Header";
 import { PetPage } from "./Components/PetPage/PetPage";
-import { Login } from "./Components/Login/Login";
-import { Signup } from "./Components/Signup/Signup";
 import { useState } from "react";
-import { Modal } from "./Components/Modal/Modal";
 
 function App() {
   const signupRef = useRef();
   const loginRef = useRef();
-
+  // const navigate = useNavigate();
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const toggleModal = () => {
     setIsOpenModal(!isOpenModal);
+    // navigate("/home");
   };
 
   return (
@@ -36,6 +40,7 @@ function App() {
                 width: "100vw",
                 backgroundColor: "#00000030",
               }}
+              onClick={toggleModal}
             ></div>
           ) : (
             <></>

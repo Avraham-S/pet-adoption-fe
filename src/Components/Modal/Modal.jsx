@@ -15,10 +15,14 @@ export const Modal = ({ children, isOpen, toggleModal }) => {
             toggleModal();
           }}
         >
-          <div className="modal-content">
-            <button onClick={toggleModal}>X</button>
-            {children}
+          <div
+            onClick={toggleModal}
+            style={{ textAlign: "end", padding: "0 0.3rem", cursor: "pointer" }}
+          >
+            X
           </div>
+          {/* <button onClick={toggleModal}>X</button> */}
+          {children}
         </div>
       )}
     </>

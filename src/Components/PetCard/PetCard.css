@@ -1,10 +1,17 @@
 .card {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   height: 15rem;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px gray;
+  transition: 0.2s ease-in;
+  filter: grayscale(60%);
+}
+
+.card:hover {
+  filter: none;
 }
 
 .see-more-link {

@@ -4,13 +4,20 @@ import "./Header.css";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import companyLogoBlack from "../../resources/pawsitive-adoption-low-resolution-logo-black-on-transparent-background.png";
 import companyLogoWhite from "../../resources/pawsitive-adoption-low-resolution-logo-white-on-transparent-background.png";
+import { useNavigate } from "react-router-dom";
 
 export const Header = ({ signupRef, loginRef }) => {
-  const [isLoggedIn] = useLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
+  const navigate = useNavigate();
 
   return (
     <div id="header">
-      <div style={{ display: "flex", alignItems: "center" }}>
+      <div
+        style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+        onClick={() => {
+          navigate("/home");
+        }}
+      >
         <img
           src={companyLogoBlack}
           alt=""
@@ -43,7 +50,21 @@ export const Header = ({ signupRef, loginRef }) => {
         }}
       >
         {isLoggedIn ? (
-          "Welcome, username"
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div>Welcome, username</div>
+            <div
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+                alignSelf: "flex-start",
+              }}
+              onClick={() => {
+                setIsLoggedIn(false);
+              }}
+            >
+              Log out
+            </div>
+          </div>
         ) : (
           <div id="login-buttons-container">
             <div

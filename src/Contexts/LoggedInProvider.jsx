@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-// import { Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const LoggedInContext = createContext();
 
@@ -8,7 +8,7 @@ export const useLoggedIn = () => {
 };
 
 export const LoggedInProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <LoggedInContext.Provider value={[isLoggedIn, setIsLoggedIn]}>

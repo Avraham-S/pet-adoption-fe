@@ -21,9 +21,9 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
     <div>
       <Modal isOpen={isOpenModal} toggleModal={toggleModal}>
         <Routes>
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="search" element={<Search />} />
+          <Route path="login" element={<Login toggleModal={toggleModal} />} />
+          <Route path="signup" element={<Signup toggleModal={toggleModal} />} />
+          <Route path="search" element={<Search toggleModal={toggleModal} />} />
         </Routes>
       </Modal>
 
@@ -32,7 +32,7 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
           <div id="image-area">
             <div>Find the purr-fect match</div>
             <div style={{ fontSize: "2rem" }}>
-              Search hundreds pets waiting to be loved
+              Search hundreds of pets waiting to be loved
             </div>
             <div
               id="search-page-button"
@@ -64,13 +64,6 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
           </div>
         )}
       </div>
-      <button
-        onClick={() => {
-          setIsLoggedIn(!isLoggedIn);
-        }}
-      >
-        Toggle Login
-      </button>
     </div>
   );
 };
