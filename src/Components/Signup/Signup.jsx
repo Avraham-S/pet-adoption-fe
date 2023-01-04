@@ -20,7 +20,8 @@ export const Signup = ({ toggleModal }) => {
         "http://localhost:8080/users/signup",
         userInfo
       );
-      setIsLoggedIn(data);
+      console.log(data.response);
+      setIsLoggedIn(true);
       toggleModal();
     } catch (error) {
       console.error(error);
@@ -58,7 +59,7 @@ export const Signup = ({ toggleModal }) => {
         </div>
         <div className="input-container">
           <label htmlFor="">Phone Number</label>
-          <input type="tel" name="phone" required />
+          <input type="tel" name="phone" />
         </div>
         <div className="input-container">
           <label htmlFor="">Email</label>
@@ -70,7 +71,12 @@ export const Signup = ({ toggleModal }) => {
         </div>
         <div className="input-container">
           <label htmlFor="">Confirm Password</label>
-          <input type="password" ref={confirmPasswordInput} required />
+          <input
+            type="password"
+            name="repassword"
+            ref={confirmPasswordInput}
+            required
+          />
         </div>
         <button>Sign Up</button>
       </form>

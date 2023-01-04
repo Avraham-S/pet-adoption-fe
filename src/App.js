@@ -15,6 +15,7 @@ import { MyPetsPage } from "./Components/MyPetsPage/MyPetsPage";
 import { Header } from "./Components/Header/Header";
 import { PetPage } from "./Components/PetPage/PetPage";
 import { useState } from "react";
+import { AddPetForm } from "./Components/AddPetForm/AddPetForm";
 
 function App() {
   const signupRef = useRef();
@@ -67,6 +68,7 @@ function App() {
             <Route path="/profileSettings" element={<ProfileSettings />} />
             <Route path="/myPets" element={<MyPetsPage />} />
             <Route path="/petPage" element={<PetPage />} />
+            <Route path="/addPet" element={<AddPetForm />} />
           </Routes>
         </LoggedInProvider>
       </div>

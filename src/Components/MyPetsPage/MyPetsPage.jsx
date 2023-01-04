@@ -14,12 +14,14 @@ export const MyPetsPage = () => {
   const [petsList, setPetsList] = useState([]);
   const [isLoggedIn] = useLoggedIn();
   const navigate = useNavigate();
-  if (!isLoggedIn) navigate("/home");
+
   const getPetsList = async () => {
     const pets = await axios.get(PET_URL);
     setPetsList(pets.data);
   };
-
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/home");
+  });
   useEffect(() => {
     getPetsList();
   }, []);

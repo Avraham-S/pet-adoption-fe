@@ -18,6 +18,9 @@ export const Navbar = () => {
           <Link to="/profileSettings" className="nav-item">
             Settings
           </Link>
+          <Link to="/addPet" className="nav-item">
+            Add Pet
+          </Link>
         </>
       )}
     </div>

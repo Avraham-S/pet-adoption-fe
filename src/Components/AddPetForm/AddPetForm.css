@@ -1,0 +1,11 @@
+#add-pet-form-container {
+  padding: 5rem;
+}
+
+#add-pet-form {
+  background-color: #769bb8;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

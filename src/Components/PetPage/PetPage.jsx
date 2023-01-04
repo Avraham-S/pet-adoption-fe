@@ -3,7 +3,7 @@ import "./PetPage.css";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-const PET_URL = "http://localhost:8080/pets/";
+const PET_URL = process.env.REACT_APP_BASE_URL + "/pets";
 
 export const PetPage = () => {
   const [pet, setPet] = useState();

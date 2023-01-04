@@ -28,7 +28,8 @@ export const Login = ({ toggleModal }) => {
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      login();
+      setIsLoggedIn(true);
+      toggleModal();
     } catch (error) {
       console.error(error);
     }

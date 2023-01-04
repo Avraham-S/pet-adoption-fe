@@ -3,13 +3,17 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { useNavigate } from "react-router-dom";
 import "./ProfileSettings.css";
 import { useRef } from "react";
+import { useEffect } from "react";
 
 export const ProfileSettings = () => {
   const [userUpdate, setUserUpdate] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const bioInput = useRef();
   const navigate = useNavigate();
-  if (!isLoggedIn) navigate("/home");
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/home");
+  });
   const handleChange = (e) => {
     setUserUpdate({ ...userUpdate, [e.target.name]: e.target.value });
   };
