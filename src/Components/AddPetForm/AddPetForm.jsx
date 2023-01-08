@@ -6,18 +6,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import "./AddPetForm.css";
-const PET_URL = process.env;
+const PET_URL = "http://localhost:8080/pets";
 console.log(PET_URL);
 
 export const AddPetForm = () => {
   const [petInfo, setPetInfo] = useState({});
   const [isLoggedIn] = useLoggedIn();
   const checkRef = useRef();
+  const bioRef = useRef();
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log(petInfo);
-    console.log(checkRef.current.checked);
-  }, [petInfo]);
+  // useEffect(() => {
+  //   console.log(petInfo);
+  //   console.log(checkRef.current.checked);
+  // }, [petInfo]);
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
@@ -36,19 +37,38 @@ export const AddPetForm = () => {
     }
   };
 
+  function handleHeight() {
+    const ta = bioRef.current;
+    ta.style.height = `auto`;
+    ta.style.height = `${ta.scrollHeight}px`;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    petInfo.hypoallergenic = !!petInfo.hypoallergenic;
+    console.log(petInfo.hypoallergenic);
+    petInfo.height = Number(petInfo.height);
+    petInfo.weight = Number(petInfo.weight);
     uploadPet(petInfo);
   };
 
   return (
     <div id="add-pet-form-container">
+      <h1 className="header">Add Pet</h1>
       <form
         action=""
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e);
+          handleHeight();
+        }}
         onSubmit={handleSubmit}
         id="add-pet-form"
       >
+        <div className="input-container">
+          Type
+          <input type="text" name="type" />
+        </div>
         <div className="input-container">
           Name
           <input type="text" name="name" />
@@ -70,14 +90,21 @@ export const AddPetForm = () => {
           <input type="text" name="breed" />
         </div>
         <div className="input-container">
+          Color
+          <input type="text" name="color" />
+        </div>
+        <div className="input-container">
           Dietary Restrictions
           <input type="text" name="dietary" />
         </div>
         <div className="input-container">
           Bio
-          <input type="text" name="bio" />
+          <textarea type="text" name="bio" ref={bioRef} />
         </div>
-        <div className="input-container">
+        <div
+          className="input-container"
+          style={{ flexDirection: "row", alignItems: "center", gap: "1rem" }}
+        >
           Hypoallergenic
           <input
             type="checkbox"
@@ -86,7 +113,7 @@ export const AddPetForm = () => {
             value={checkRef.current?.checked ?? false}
           />
         </div>
-        <button>submit</button>
+        <button>Upload Pet</button>
       </form>
     </div>
   );
