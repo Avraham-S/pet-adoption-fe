@@ -3,20 +3,39 @@ import "./PetPage.css";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-const PET_URL = process.env.REACT_APP_BASE_URL + "/pets";
-
+import { useUser } from "../../Contexts/UserProvider";
+const PET_URL = "http://localhost:8080/pets/";
 export const PetPage = () => {
   const [pet, setPet] = useState();
+  const [user] = useUser();
   const id = new URLSearchParams(window.location.search).get("id");
 
   const getPetData = async () => {
-    const res = await axios.get(PET_URL + id);
-    setPet(res.data);
+    const { data } = await axios.get(PET_URL + id);
+    console.log(data);
+    setPet(data[0]);
   };
 
   useEffect(() => {
     getPetData();
   }, []);
+
+  const requestAdoption = async (type) => {
+    try {
+      const { data } = await axios.post(PET_URL + "adopt", {
+        type,
+        ownerId: user.id,
+        petId: pet.petId,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleAdopt = (e) => {
+    const type = e.target.value;
+    requestAdoption(type);
+  };
 
   if (!pet) return;
   return (
@@ -56,6 +75,14 @@ export const PetPage = () => {
         <div className="pet-detail">
           Breed: <span>{pet.breed}</span>
         </div>
+      </div>
+      <div>
+        <button value="adopt" onClick={handleAdopt}>
+          Adopt
+        </button>
+        <button value="foster" onClick={handleAdopt}>
+          Foster
+        </button>
       </div>
     </div>
   );

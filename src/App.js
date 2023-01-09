@@ -16,6 +16,8 @@ import { Header } from "./Components/Header/Header";
 import { PetPage } from "./Components/PetPage/PetPage";
 import { useState } from "react";
 import { AddPetForm } from "./Components/AddPetForm/AddPetForm";
+import { Search } from "./Components/Search/Search";
+import { UserProvider } from "./Contexts/UserProvider";
 
 function App() {
   const signupRef = useRef();
@@ -31,46 +33,49 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <LoggedInProvider>
-          {isOpenModal ? (
-            <div
-              id="modal-overlay"
-              style={{
-                position: "fixed",
-                height: "100vh",
-                width: "100vw",
-                backgroundColor: "#00000030",
-              }}
-              onClick={toggleModal}
-            ></div>
-          ) : (
-            <></>
-          )}
-          <Header
-            signupRef={signupRef}
-            loginRef={loginRef}
-            toggleModal={toggleModal}
-          />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route
-              path="/home/*"
-              element={
-                <Home
-                  signupRef={signupRef}
-                  loginRef={loginRef}
-                  isOpenModal={isOpenModal}
-                  toggleModal={toggleModal}
-                />
-              }
+        <UserProvider>
+          <LoggedInProvider>
+            {isOpenModal ? (
+              <div
+                id="modal-overlay"
+                style={{
+                  position: "fixed",
+                  height: "100vh",
+                  width: "100vw",
+                  backgroundColor: "#00000030",
+                }}
+                onClick={toggleModal}
+              ></div>
+            ) : (
+              <></>
+            )}
+            <Header
+              signupRef={signupRef}
+              loginRef={loginRef}
+              toggleModal={toggleModal}
             />
-            <Route path="/profileSettings" element={<ProfileSettings />} />
-            <Route path="/myPets" element={<MyPetsPage />} />
-            <Route path="/petPage" element={<PetPage />} />
-            <Route path="/addPet" element={<AddPetForm />} />
-          </Routes>
-        </LoggedInProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
+              <Route
+                path="/home/*"
+                element={
+                  <Home
+                    signupRef={signupRef}
+                    loginRef={loginRef}
+                    isOpenModal={isOpenModal}
+                    toggleModal={toggleModal}
+                  />
+                }
+              />
+              <Route path="/profileSettings" element={<ProfileSettings />} />
+              <Route path="/myPets" element={<MyPetsPage />} />
+              <Route path="/petPage" element={<PetPage />} />
+              <Route path="/addPet" element={<AddPetForm />} />
+              <Route path="/search" element={<Search />} />
+            </Routes>
+          </LoggedInProvider>
+        </UserProvider>
       </div>
     </BrowserRouter>
   );

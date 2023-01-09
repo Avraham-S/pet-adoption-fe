@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import "./Signup.css";
@@ -9,6 +9,7 @@ export const Signup = ({ toggleModal }) => {
   const [, setIsLoggedIn] = useLoggedIn();
   const passwordInput = useRef();
   const confirmPasswordInput = useRef();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -22,7 +23,7 @@ export const Signup = ({ toggleModal }) => {
       );
       console.log(data.response);
       setIsLoggedIn(true);
-      toggleModal();
+      navigate("/home/login");
     } catch (error) {
       console.error(error);
     }
@@ -31,7 +32,6 @@ export const Signup = ({ toggleModal }) => {
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      console.log(userInfo);
       if (passwordInput.current.value !== confirmPasswordInput.current.value)
         throw Error("Passwords dont match");
       signup();

@@ -3,9 +3,11 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import { useUser } from "../../Contexts/UserProvider";
 
 export const Login = ({ toggleModal }) => {
   const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useUser();
   const [, setIsLoggedIn] = useLoggedIn();
 
   const handleChange = (e) => {
@@ -18,7 +20,10 @@ export const Login = ({ toggleModal }) => {
         "http://localhost:8080/users/login",
         userInfo
       );
-      setIsLoggedIn(data);
+      console.log(data);
+      localStorage.setItem("token", JSON.stringify(data.token));
+      setUser({ ...data });
+      setIsLoggedIn(true);
       toggleModal();
     } catch (error) {
       console.error(error);
@@ -28,8 +33,7 @@ export const Login = ({ toggleModal }) => {
   const handleSubmit = (e) => {
     try {
       e.preventDefault();
-      setIsLoggedIn(true);
-      toggleModal();
+      login();
     } catch (error) {
       console.error(error);
     }

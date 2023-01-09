@@ -23,7 +23,7 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
         <Routes>
           <Route path="login" element={<Login toggleModal={toggleModal} />} />
           <Route path="signup" element={<Signup toggleModal={toggleModal} />} />
-          <Route path="search" element={<Search toggleModal={toggleModal} />} />
+          {/* <Route path="search" element={<Search toggleModal={toggleModal} />} /> */}
         </Routes>
       </Modal>
 
@@ -37,8 +37,7 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
             <div
               id="search-page-button"
               onClick={() => {
-                toggleModal();
-                navigate("/home/search");
+                navigate("/search");
               }}
             >
               <div>Search</div>

@@ -8,6 +8,7 @@
   box-shadow: 0 0 5px gray;
   transition: 0.2s ease-in;
   filter: grayscale(60%);
+  width: 12rem;
 }
 
 .card:hover {

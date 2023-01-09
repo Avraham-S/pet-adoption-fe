@@ -5,9 +5,11 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import companyLogoBlack from "../../resources/pawsitive-adoption-low-resolution-logo-black-on-transparent-background.png";
 import companyLogoWhite from "../../resources/pawsitive-adoption-low-resolution-logo-white-on-transparent-background.png";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../Contexts/UserProvider";
 
 export const Header = ({ signupRef, loginRef }) => {
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
+  const [user] = useUser();
   const navigate = useNavigate();
 
   return (
@@ -51,7 +53,7 @@ export const Header = ({ signupRef, loginRef }) => {
       >
         {isLoggedIn ? (
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div>Welcome, username</div>
+            <div>Welcome, {user.name}</div>
             <div
               style={{
                 textDecoration: "underline",

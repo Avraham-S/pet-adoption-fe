@@ -7,16 +7,18 @@ import { useEffect } from "react";
 
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../Contexts/UserProvider";
 
-const PET_URL = "http://localhost:8080/pets";
+const PET_URL = "http://localhost:8080/pets/";
 console.log(PET_URL);
 export const MyPetsPage = () => {
   const [petsList, setPetsList] = useState([]);
   const [isLoggedIn] = useLoggedIn();
+  const [user] = useUser();
   const navigate = useNavigate();
 
   const getPetsList = async () => {
-    const pets = await axios.get(PET_URL);
+    const pets = await axios.get(PET_URL + user.id);
     setPetsList(pets.data);
   };
   useEffect(() => {
@@ -32,8 +34,8 @@ export const MyPetsPage = () => {
         <PetCard
           name={pet.name}
           status={pet.adoptionStatus}
-          key={pet.id}
-          id={pet.id}
+          key={pet.petId}
+          id={pet.petId}
         />
       ))}
     </div>
