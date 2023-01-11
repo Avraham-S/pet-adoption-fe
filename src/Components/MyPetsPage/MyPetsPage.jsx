@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../Contexts/UserProvider";
 
 const PET_URL = "http://localhost:8080/pets/";
@@ -18,9 +18,13 @@ export const MyPetsPage = () => {
   const navigate = useNavigate();
 
   const getPetsList = async () => {
-    const pets = await axios.get(PET_URL + user.id);
+    console.log(user);
+    const pets = await axios.get(PET_URL + `?ownerId=${user.id}`);
+    console.log(pets);
     setPetsList(pets.data);
   };
+  // ("http://localhost:8080/pets/648d6fbd-cc3f-4049-93c7-6320c1dcdad0");
+
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
   });
@@ -29,15 +33,28 @@ export const MyPetsPage = () => {
   }, []);
 
   return (
-    <div id="card-container">
-      {petsList.slice(0, 15).map((pet) => (
-        <PetCard
-          name={pet.name}
-          status={pet.adoptionStatus}
-          key={pet.petId}
-          id={pet.petId}
-        />
-      ))}
-    </div>
+    <>
+      {petsList.length ? (
+        <div id="card-container">
+          {petsList.map((pet) => (
+            <PetCard
+              name={pet.name}
+              status={pet.adoptionStatus}
+              key={pet.petId}
+              id={pet.petId}
+            />
+          ))}
+        </div>
+      ) : (
+        <div
+          style={{
+            fontSize: "1.5rem",
+            textAlign: "center",
+          }}
+        >
+          No pets yet. <br /> Click <Link to="/search">here</Link> to find one
+        </div>
+      )}
+    </>
   );
 };

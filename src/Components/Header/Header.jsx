@@ -62,6 +62,7 @@ export const Header = ({ signupRef, loginRef }) => {
               }}
               onClick={() => {
                 setIsLoggedIn(false);
+                localStorage.removeItem("token");
               }}
             >
               Log out

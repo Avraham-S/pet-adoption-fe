@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
+import { headersConfig } from "../../resources/helpers";
 import "./AddPetForm.css";
 const PET_URL = "http://localhost:8080/pets";
 console.log(PET_URL);
@@ -30,7 +31,8 @@ export const AddPetForm = () => {
 
   const uploadPet = async (data) => {
     try {
-      const res = await axios.post(PET_URL, data);
+      console.log(headersConfig);
+      const res = await axios.post(PET_URL, data, headersConfig);
       console.log(res);
     } catch (err) {
       console.error(err);

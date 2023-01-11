@@ -3,10 +3,19 @@ import "./Search.css";
 import searchImg from "../../resources/search_FILL0_wght400_GRAD0_opsz48.svg";
 import { PetCard } from "../PetCard/PetCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useLoggedIn } from "../../Contexts/LoggedInProvider";
+import { useEffect } from "react";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
   const [resuts, setResults] = useState([]);
+  const [isLoggedIn] = useLoggedIn();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/home");
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
