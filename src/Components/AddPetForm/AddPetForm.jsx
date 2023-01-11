@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
-import { headersConfig } from "../../resources/helpers";
+import { uploadPhoto } from "../../resources/helpers";
 import "./AddPetForm.css";
+
 const PET_URL = "http://localhost:8080/pets";
-console.log(PET_URL);
 
 export const AddPetForm = () => {
   const [petInfo, setPetInfo] = useState({});
@@ -16,21 +16,36 @@ export const AddPetForm = () => {
   const checkRef = useRef();
   const bioRef = useRef();
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   console.log(petInfo);
-  //   console.log(checkRef.current.checked);
-  // }, [petInfo]);
+  const imageInputRef = useRef();
+  const fileNameRef = useRef();
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
+    console.log(petInfo);
   });
 
+  const handleImage = async (file) => {
+    try {
+      const downloadUrl = await uploadPhoto(file);
+      setPetInfo({ ...petInfo, picture: downloadUrl });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleChange = (e) => {
+    if (e.target.name === "picture") {
+      // handleImage(e.target.files[0]);
+      return;
+    }
     setPetInfo({ ...petInfo, [e.target.name]: e.target.value });
   };
 
   const uploadPet = async (data) => {
     try {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       console.log(headersConfig);
       const res = await axios.post(PET_URL, data, headersConfig);
       console.log(res);
@@ -45,13 +60,14 @@ export const AddPetForm = () => {
     ta.style.height = `${ta.scrollHeight}px`;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     petInfo.hypoallergenic = !!petInfo.hypoallergenic;
-    console.log(petInfo.hypoallergenic);
     petInfo.height = Number(petInfo.height);
     petInfo.weight = Number(petInfo.weight);
+    await handleImage(imageInputRef.current.files[0]);
+
     uploadPet(petInfo);
   };
 
@@ -75,10 +91,7 @@ export const AddPetForm = () => {
           Name
           <input type="text" name="name" />
         </div>
-        <div className="input-container">
-          Picture
-          <input type="text" name="picture" />
-        </div>
+
         <div className="input-container">
           Height
           <input type="text" name="height" />
@@ -114,6 +127,28 @@ export const AddPetForm = () => {
             ref={checkRef}
             value={checkRef.current?.checked ?? false}
           />
+        </div>
+        <div className="input-container">
+          Picture
+          <span ref={fileNameRef}></span>
+          <input
+            type="file"
+            name="picture"
+            ref={imageInputRef}
+            hidden
+            onChange={(e) => {
+              if (e.target.files[0])
+                fileNameRef.current.textContent = e.target.files[0].name;
+            }}
+          />
+          <button
+            type="button"
+            onClick={(e) => {
+              imageInputRef.current.click();
+            }}
+          >
+            Choose File
+          </button>
         </div>
         <button>Upload Pet</button>
       </form>

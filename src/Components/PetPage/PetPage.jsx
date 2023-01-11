@@ -3,7 +3,7 @@ import "./PetPage.css";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import { headersConfig } from "../../resources/helpers";
+
 import { useUser } from "../../Contexts/UserProvider";
 const PET_URL = "http://localhost:8080/pets/";
 export const PetPage = () => {
@@ -30,6 +30,9 @@ export const PetPage = () => {
 
   const requestAdoption = async (type) => {
     try {
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const { data } = await axios.post(
         PET_URL + "adopt",
         {
