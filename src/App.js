@@ -18,6 +18,8 @@ import { useState } from "react";
 import { AddPetForm } from "./Components/AddPetForm/AddPetForm";
 import { Search } from "./Components/Search/Search";
 import { UserProvider } from "./Contexts/UserProvider";
+import { AdminPage } from "./Components/AdminPage/AdminPage";
+import { NotFound } from "./Components/NotFound/NotFound";
 
 function App() {
   const signupRef = useRef();
@@ -73,6 +75,8 @@ function App() {
               <Route path="/petPage" element={<PetPage />} />
               <Route path="/addPet" element={<AddPetForm />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/adminPage" element={<AdminPage />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </LoggedInProvider>
         </UserProvider>

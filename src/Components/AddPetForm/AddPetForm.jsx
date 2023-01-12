@@ -12,7 +12,7 @@ const PET_URL = "http://localhost:8080/pets";
 
 export const AddPetForm = () => {
   const [petInfo, setPetInfo] = useState({});
-  const [isLoggedIn] = useLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const checkRef = useRef();
   const bioRef = useRef();
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ export const AddPetForm = () => {
       const res = await axios.post(PET_URL, data, headersConfig);
       console.log(res);
     } catch (err) {
+      if (err.response.status === 401) setIsLoggedIn(false);
       console.error(err);
     }
   };
@@ -91,7 +92,6 @@ export const AddPetForm = () => {
           Name
           <input type="text" name="name" />
         </div>
-
         <div className="input-container">
           Height
           <input type="text" name="height" />
@@ -135,11 +135,11 @@ export const AddPetForm = () => {
             type="file"
             name="picture"
             ref={imageInputRef}
-            hidden
             onChange={(e) => {
               if (e.target.files[0])
                 fileNameRef.current.textContent = e.target.files[0].name;
             }}
+            hidden
           />
           <button
             type="button"

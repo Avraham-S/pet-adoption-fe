@@ -2,9 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
+import { useUser } from "../../Contexts/UserProvider";
 
 export const Navbar = () => {
   const [isLoggedIn] = useLoggedIn();
+  const [user] = useUser();
   return (
     <div id="navbar">
       {isLoggedIn && (
@@ -18,9 +20,16 @@ export const Navbar = () => {
           <Link to="/profileSettings" className="nav-item">
             Settings
           </Link>
-          <Link to="/addPet" className="nav-item">
-            Add Pet
-          </Link>
+          {user.isAdmin && (
+            <>
+              <Link to="/addPet" className="nav-item">
+                Add Pet
+              </Link>
+              <Link to="/adminPage" className="nav-item">
+                Admin
+              </Link>
+            </>
+          )}
         </>
       )}
     </div>

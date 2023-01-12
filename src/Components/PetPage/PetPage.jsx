@@ -5,11 +5,15 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import { useUser } from "../../Contexts/UserProvider";
+import { useLoggedIn } from "../../Contexts/LoggedInProvider";
+import { useNavigate } from "react-router-dom";
 const PET_URL = "http://localhost:8080/pets/";
 export const PetPage = () => {
   const [pet, setPet] = useState();
   const [user] = useUser();
+  const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const [isUsersPet, setIsUsersPet] = useState(false);
+  const navigate = useNavigate();
   const id = new URLSearchParams(window.location.search).get("id");
 
   const getPetData = async () => {
@@ -18,6 +22,10 @@ export const PetPage = () => {
     setPet(data[0]);
     console.log(pet);
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) navigate("/home");
+  });
 
   useEffect(() => {
     getPetData();
@@ -45,6 +53,7 @@ export const PetPage = () => {
       const [updatedPet] = data;
       setPet(updatedPet);
     } catch (error) {
+      if (error.response.status === 401) setIsLoggedIn(false);
       console.error(error);
     }
   };

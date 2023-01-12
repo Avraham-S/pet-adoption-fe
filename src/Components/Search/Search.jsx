@@ -47,12 +47,13 @@ export const Search = () => {
         </button>
       </form>
       <div id="search-results">
-        {resuts.map((result) => {
+        {resuts.map((result, i) => {
           return (
             <PetCard
               name={result.name}
               id={result.petId}
               status={result.adoptionStatus}
+              key={i}
             />
           );
         })}

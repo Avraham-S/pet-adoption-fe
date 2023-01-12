@@ -7,9 +7,9 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [currentUser, setUser] = useState({});
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <UserContext.Provider value={[currentUser, setUser]}>
       {children}
     </UserContext.Provider>
   );

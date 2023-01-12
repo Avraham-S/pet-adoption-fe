@@ -32,19 +32,19 @@ const firebaseConfig = {
 const fb = initializeApp(firebaseConfig);
 const storage = getStorage(fb);
 
-export const uploadPhoto = async (file) => {
+export const uploadPhoto = async (file, progressCB) => {
   try {
     const storageRef = ref(storage, `file/${file.name}`);
     const uploadTask = await uploadBytesResumable(storageRef, file);
     console.log(uploadTask);
 
-    // should promisify
     return new Promise((resolve, reject) => {
       uploadTask.task.on(
         "state_changed",
         (snapshot) => {
           const progress =
             Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10;
+          // progressCB(progress)
         },
         (error) => {
           throw reject(error);
