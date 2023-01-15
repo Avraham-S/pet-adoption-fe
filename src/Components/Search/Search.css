@@ -39,7 +39,7 @@
 }
 
 #search-results {
-  height: 40rem;
+  /* height: 40rem; */
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;

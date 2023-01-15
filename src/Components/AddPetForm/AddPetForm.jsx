@@ -18,10 +18,10 @@ export const AddPetForm = () => {
   const navigate = useNavigate();
   const imageInputRef = useRef();
   const fileNameRef = useRef();
+  const formRef = useRef();
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
-    console.log(petInfo);
   });
 
   const handleImage = async (file) => {
@@ -67,9 +67,12 @@ export const AddPetForm = () => {
     petInfo.hypoallergenic = !!petInfo.hypoallergenic;
     petInfo.height = Number(petInfo.height);
     petInfo.weight = Number(petInfo.weight);
-    await handleImage(imageInputRef.current.files[0]);
-
-    uploadPet(petInfo);
+    console.log("img files", imageInputRef.current.files.length);
+    if (imageInputRef.current.files.length !== 0) {
+      await handleImage(imageInputRef.current.files[0]);
+    }
+    await uploadPet(petInfo);
+    formRef.current.reset();
   };
 
   return (
@@ -83,6 +86,7 @@ export const AddPetForm = () => {
         }}
         onSubmit={handleSubmit}
         id="add-pet-form"
+        ref={formRef}
       >
         <div className="input-container">
           Type

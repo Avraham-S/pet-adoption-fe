@@ -23,7 +23,41 @@ export const PetPage = () => {
     console.log(pet);
   };
 
+  const renderButtons = () => {
+    if (pet.adoptionStatus === "available")
+      return (
+        <>
+          <button value="adopt" onClick={handleAdoptPet}>
+            Adopt
+          </button>
+          <button value="foster" onClick={handleAdoptPet}>
+            Foster
+          </button>
+        </>
+      );
+    if (!isUsersPet) return null;
+    if (pet.adoptionStatus === "fostered")
+      return (
+        <>
+          <button value="adopt" onClick={handleAdoptPet}>
+            Adopt
+          </button>
+          <button value="return" onClick={handleAdoptPet}>
+            Return
+          </button>
+        </>
+      );
+
+    if (pet.adoptionStatus === "adopted")
+      return (
+        <button value="return" onClick={handleAdoptPet}>
+          Return
+        </button>
+      );
+  };
+
   useEffect(() => {
+    console.log(isUsersPet);
     if (!isLoggedIn) navigate("/home");
   });
 
@@ -102,24 +136,7 @@ export const PetPage = () => {
           Breed: <span>{pet.breed}</span>
         </div>
       </div>
-      <div>
-        {isUsersPet ? (
-          <button value="return" onClick={handleAdoptPet}>
-            Return
-          </button>
-        ) : pet.adoptionStatus === "available" ? (
-          <>
-            <button value="adopt" onClick={handleAdoptPet}>
-              Adopt
-            </button>
-            <button value="foster" onClick={handleAdoptPet}>
-              Foster
-            </button>
-          </>
-        ) : (
-          <></>
-        )}
-      </div>
+      <div>{renderButtons()}</div>
     </div>
   );
 };

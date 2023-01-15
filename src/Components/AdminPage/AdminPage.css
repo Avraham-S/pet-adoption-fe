@@ -1,13 +1,27 @@
+.user-list-container {
+  overflow: scroll;
+  height: 35rem;
+  background-color: aliceblue;
+  border: 1px solid black;
+}
+
 .user-list-item {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 1.5fr 1fr;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 1.3fr;
   gap: 0.7rem;
   background-color: aliceblue;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
+
+/* .user-list-item:hover {
+  background-color: #c6cacecd;
+} */
 .active-user-button {
   pointer-events: none;
   background-color: rgba(164, 169, 174, 0.592);
-  color: rgba(129, 131, 133, 0.805);
+  color: #818385cd;
+}
+.active {
+  background-color: rgb(170, 179, 187);
 }
