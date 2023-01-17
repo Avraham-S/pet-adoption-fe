@@ -13,7 +13,7 @@
   color: rgba(100, 58, 228, 0.733);
 }
 #header {
-  height: fit-content;
+  height: 6rem;
   background-color: #00bfff;
   font-size: 1rem;
   display: flex;
@@ -21,6 +21,9 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0 3px;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
 }
 #login-buttons-container {
   display: flex;

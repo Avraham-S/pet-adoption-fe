@@ -26,6 +26,7 @@
   height: 100%;
   gap: 2rem;
   border-bottom: 2rem solid #0098b6;
+  /* border-top: 2rem solid #0098b6; */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.594);
   padding: 1rem;
 }

@@ -3,7 +3,6 @@ import "./PetPage.css";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-
 import { useUser } from "../../Contexts/UserProvider";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { useNavigate } from "react-router-dom";
@@ -56,10 +55,24 @@ export const PetPage = () => {
       );
   };
 
-  useEffect(() => {
-    console.log(isUsersPet);
-    if (!isLoggedIn) navigate("/home");
-  });
+  const renderEditButton = () => {
+    if (user.isAdmin) {
+      return (
+        <button
+          onClick={() => {
+            navigate(`/editPet/?id=${pet.petId}`);
+          }}
+        >
+          Edit
+        </button>
+      );
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log(isUsersPet);
+  //   if (!isLoggedIn) navigate("/home");
+  // });
 
   useEffect(() => {
     getPetData();
@@ -101,8 +114,9 @@ export const PetPage = () => {
   return (
     <div id="pet-page-container">
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmtG1aTa9RLWZjJiw7nct27KOB_RjHkSz0aWNKCpGv&s"
+        src={pet.picture}
         alt=""
+        style={{ height: "10rem", width: "20rem", borderColor: "white" }}
       />
       <div id="pet-details">
         <div className="pet-detail">
@@ -136,7 +150,12 @@ export const PetPage = () => {
           Breed: <span>{pet.breed}</span>
         </div>
       </div>
-      <div>{renderButtons()}</div>
+      {isLoggedIn && (
+        <div>
+          {renderButtons()}
+          {renderEditButton()}
+        </div>
+      )}
     </div>
   );
 };

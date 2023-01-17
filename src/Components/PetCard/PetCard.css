@@ -7,7 +7,7 @@
   border-radius: 10px;
   box-shadow: 0 0 5px gray;
   transition: 0.2s ease-in;
-  filter: grayscale(60%);
+  filter: grayscale(50%);
   width: 12rem;
 }
 
@@ -27,4 +27,44 @@
   justify-content: space-between;
   flex-grow: 1;
   gap: 3px;
+}
+
+.save-button {
+  font-size: 1rem;
+  cursor: pointer;
+  width: fit-content;
+  transition: 0.3s ease-out;
+}
+
+.saved {
+  font-size: 1rem;
+  cursor: pointer;
+  color: rgb(255, 5, 92);
+  width: fit-content;
+  animation: savePet 0.2s ease-in-out 1;
+  filter: none !important;
+}
+
+.pets-option {
+  border-radius: 7px;
+  padding: 5px;
+  box-shadow: 0 0 5px;
+  pointer-events: all;
+  cursor: pointer;
+  background-color: aliceblue;
+}
+
+.active-list {
+  background-color: rgb(147, 157, 164);
+  pointer-events: none;
+  box-shadow: 0 0 2px;
+}
+
+@keyframes savePet {
+  25% {
+    transform: rotateZ(15deg);
+  }
+  50% {
+    transform: rotateZ(-15deg);
+  }
 }

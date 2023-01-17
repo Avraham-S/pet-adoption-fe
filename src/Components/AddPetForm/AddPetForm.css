@@ -1,5 +1,6 @@
 #add-pet-form-container {
   padding: 1rem 20% 1rem 20%;
+  min-width: fit-content;
 }
 
 #add-pet-form {
@@ -9,4 +10,10 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-width: fit-content;
+}
+
+.pet-form-modal {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
 }

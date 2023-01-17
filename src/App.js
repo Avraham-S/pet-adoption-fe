@@ -20,6 +20,7 @@ import { Search } from "./Components/Search/Search";
 import { UserProvider } from "./Contexts/UserProvider";
 import { AdminPage } from "./Components/AdminPage/AdminPage";
 import { NotFound } from "./Components/NotFound/NotFound";
+import { ProfilePage } from "./Components/ProfilePage/ProfilePage";
 
 function App() {
   const signupRef = useRef();
@@ -56,7 +57,6 @@ function App() {
               loginRef={loginRef}
               toggleModal={toggleModal}
             />
-            <Navbar />
             <Routes>
               <Route path="/" element={<Navigate to="/home" />} />
               <Route
@@ -76,6 +76,8 @@ function App() {
               <Route path="/addPet" element={<AddPetForm />} />
               <Route path="/search" element={<Search />} />
               <Route path="/adminPage" element={<AdminPage />} />
+              <Route path="/editPet" element={<AddPetForm isEdit={true} />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </LoggedInProvider>

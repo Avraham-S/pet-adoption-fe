@@ -13,20 +13,24 @@ export const ProfileSettings = () => {
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const [userInfo, setUserInfo] = useState({});
   const [currentUser] = useUser();
-  const bioInput = useRef();
   const navigate = useNavigate();
+  const formRef = useRef();
+  const bioInput = useRef();
   const passwordInput = useRef();
   const confirmPasswordInput = useRef();
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
-    console.log("set userUpdate", userUpdate);
+    // console.log("set userUpdate", userUpdate);
   });
 
   useEffect(() => {
     getUserInfo();
-    console.log("use effect", userUpdate);
   }, []);
+
+  useEffect(() => {
+    formRef.current.reset();
+  }, [userInfo]);
 
   const getUserInfo = async () => {
     try {
@@ -48,14 +52,14 @@ export const ProfileSettings = () => {
       const token = JSON.parse(localStorage.getItem("token"));
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
-      await axios.put(
+      const { data } = await axios.put(
         `http://localhost:8080/users/updateUser/${
           showUpdatePassword ? "password/" : ""
         }${id}`,
         userUpdate,
         headersConfig
       );
-      console.log("passed");
+      console.log(data);
     } catch (error) {
       console.log(error.response);
     }
@@ -74,8 +78,9 @@ export const ProfileSettings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (passwordInput.current.value !== confirmPasswordInput.current.value)
-      throw Error("Passwords dont match");
+    if (showUpdatePassword)
+      if (passwordInput.current.value !== confirmPasswordInput.current.value)
+        throw Error("Passwords dont match");
     updateUser(currentUser.id);
   };
   return (
@@ -88,6 +93,7 @@ export const ProfileSettings = () => {
           handleHeight();
         }}
         onSubmit={handleSubmit}
+        ref={formRef}
       >
         <div className="input-container">
           <label htmlFor="firstName">First Name</label>

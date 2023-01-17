@@ -4,6 +4,7 @@ import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import { Login } from "../Login/Login";
 import { Signup } from "../Signup/Signup";
+import { useUser } from "../../Contexts/UserProvider";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { Search } from "../Search/Search";
 import searchIcon from "../../resources/search_FILL0_wght400_GRAD0_opsz48.svg";
@@ -16,6 +17,7 @@ const signupButtonContainerStyle = {
 
 export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
+  const [user] = useUser();
   const navigate = useNavigate();
   return (
     <div>
@@ -29,7 +31,19 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
 
       <div id="main">
         <div id="background-image">
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#0098b6",
+              padding: "0.2rem",
+              paddingLeft: "1rem",
+            }}
+          >
+            {" "}
+            Welcome, {user.name}
+          </div>
           <div id="image-area">
+            {/* <div>Welcome, {user.name}</div> */}
             <div>Find the purr-fect match</div>
             <div style={{ fontSize: "2rem" }}>
               Search hundreds of pets waiting to be loved
