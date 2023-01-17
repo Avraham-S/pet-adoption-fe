@@ -25,7 +25,6 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
         <Routes>
           <Route path="login" element={<Login toggleModal={toggleModal} />} />
           <Route path="signup" element={<Signup toggleModal={toggleModal} />} />
-          {/* <Route path="search" element={<Search toggleModal={toggleModal} />} /> */}
         </Routes>
       </Modal>
 
@@ -43,7 +42,6 @@ export const Home = ({ signupRef, loginRef, isOpenModal, toggleModal }) => {
             Welcome, {user.name}
           </div>
           <div id="image-area">
-            {/* <div>Welcome, {user.name}</div> */}
             <div>Find the purr-fect match</div>
             <div style={{ fontSize: "2rem" }}>
               Search hundreds of pets waiting to be loved

@@ -21,6 +21,3 @@ function createComponentFiles(componentName) {
 for (let i = 2; i < process.argv.length; i++) {
   createComponentFiles(process.argv[i]);
 }
-
-/////////////////////////////
-// setStateInfo({...prevState, [e.target.id]: e.target.value})

@@ -8,9 +8,10 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { uploadPhoto } from "../../resources/helpers";
 import "./AddPetForm.css";
 
-const PET_URL = "http://localhost:8080/pets";
+const PET_URL = process.env.REACT_APP_BASE_URL;
 
 export const AddPetForm = (props) => {
+  console.log(process.env.REACT_APP_BASE_URL);
   const [petInfo, setPetInfo] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const [defaultInfo, setDefaultInfo] = useState({});
@@ -24,14 +25,12 @@ export const AddPetForm = (props) => {
 
   const getPetInfo = async () => {
     try {
-      console.log("pet info");
       if (!id) return;
       const { data } = await axios.get(PET_URL + "/" + id);
       const [pet] = data;
       setDefaultInfo(pet);
       setPetInfo(pet);
       formRef.current.reset();
-      console.log(pet);
     } catch (error) {
       console.error(error);
     }
@@ -55,7 +54,6 @@ export const AddPetForm = (props) => {
 
   const handleChange = (e) => {
     if (e.target.name === "picture") {
-      // handleImage(e.target.files[0]);
       return;
     }
     setPetInfo({ ...petInfo, [e.target.name]: e.target.value });
@@ -66,14 +64,12 @@ export const AddPetForm = (props) => {
       const token = JSON.parse(localStorage.getItem("token"));
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
-      console.log(headersConfig);
+
       if (props.isEdit) {
         const res = await axios.put(PET_URL + `/${id}`, data, headersConfig);
         getPetInfo();
-        console.log(res);
       } else {
         const res = await axios.post(PET_URL, data, headersConfig);
-        console.log(res);
       }
     } catch (err) {
       if (err.response.status === 401) setIsLoggedIn(false);
@@ -93,7 +89,6 @@ export const AddPetForm = (props) => {
     petInfo.hypoallergenic = !!petInfo.hypoallergenic;
     petInfo.height = Number(petInfo.height);
     petInfo.weight = Number(petInfo.weight);
-    console.log("img files", imageInputRef.current.files.length);
     if (imageInputRef.current.files.length !== 0) {
       await handleImage(imageInputRef.current.files[0]);
     }

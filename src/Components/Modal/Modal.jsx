@@ -21,7 +21,6 @@ export const Modal = ({ children, isOpen, toggleModal }) => {
           >
             X
           </div>
-          {/* <button onClick={toggleModal}>X</button> */}
           {children}
         </div>
       )}

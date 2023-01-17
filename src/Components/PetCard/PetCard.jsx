@@ -12,7 +12,7 @@ export const PetCard = ({ name, status, id, savedId, image }) => {
   const [isLoggedIn] = useLoggedIn();
   const [user] = useUser();
   const [saved, setSaved] = useState(false);
-  // console.log(id);
+
   const getImgUrl = async () => {
     const { data } = await axios.get("https://dog.ceo/api/breeds/image/random");
     const url = data.message;
@@ -25,14 +25,12 @@ export const PetCard = ({ name, status, id, savedId, image }) => {
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const data = await axios.post(
-        `http://localhost:8080/pets/save/${user.id}/${petId}`,
+        `${process.env.REACT_APP_BASE_URL}pets/save/${user.id}/${petId}`,
         {},
         headersConfig
       );
 
       setSaved(true);
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -44,12 +42,10 @@ export const PetCard = ({ name, status, id, savedId, image }) => {
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const { data } = await axios.delete(
-        `http://localhost:8080/pets/save/${user.id}/${petId}`,
+        `${process.env.REACT_APP_BASE_URL}pets/save/${user.id}/${petId}`,
         headersConfig
       );
       setSaved(false);
-
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -57,23 +53,14 @@ export const PetCard = ({ name, status, id, savedId, image }) => {
 
   useEffect(() => {
     setSaved(user.id === savedId);
-    // console.log(id);
+
     getImgUrl();
   }, []);
-
-  useEffect(() => {
-    // console.log(savedId);
-    console.log(saved);
-    // console.log(id);
-  }, [saved]);
 
   return (
     <div
       className="card"
       style={{
-        // backgroundImage:
-        //   "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmtG1aTa9RLWZjJiw7nct27KOB_RjHkSz0aWNKCpGv&s)",
-
         backgroundImage: `url(${image ? image : defaultImage})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

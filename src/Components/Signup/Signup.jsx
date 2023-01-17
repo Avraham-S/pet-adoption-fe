@@ -18,10 +18,9 @@ export const Signup = ({ toggleModal }) => {
   const signup = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/users/signup",
+        process.env.REACT_APP_BASE_URL + "users/signup",
         userInfo
       );
-      console.log(data.response);
       setIsLoggedIn(true);
       navigate("/home/login");
     } catch (error) {
@@ -35,7 +34,6 @@ export const Signup = ({ toggleModal }) => {
       if (passwordInput.current.value !== confirmPasswordInput.current.value)
         throw Error("Passwords dont match");
       signup();
-      console.log("Signed Up");
     } catch (error) {
       console.error(error);
     }

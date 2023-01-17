@@ -21,7 +21,7 @@ export const Search = () => {
     const objArray = Object.entries(query).filter(
       (entry) => entry[0] === "type"
     );
-    console.log(objArray);
+
     setQuery(Object.fromEntries(objArray));
   };
 
@@ -34,9 +34,10 @@ export const Search = () => {
 
   const getTypes = async () => {
     try {
-      console.log("getting types fe");
-      const { data } = await axios.get("http://localhost:8080/pets/types");
-      console.log(data);
+      const { data } = await axios.get(
+        process.env.REACT_APP_BASE_URL + "pets/types"
+      );
+
       setTypes(data);
     } catch (error) {
       console.error(error);
@@ -45,19 +46,16 @@ export const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (query.trim() === "") return;
     getPetsFromServer();
-    console.log(query);
   };
 
   const getPetsFromServer = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/pets/${
+        `${process.env.REACT_APP_BASE_URL}pets/${
           user ? `?id=${user.id}` : ""
         }${`&queries=${JSON.stringify(query)}`}`
       );
-      console.log(data);
       setResults(data);
     } catch (err) {
       console.error(err);
@@ -187,7 +185,6 @@ export const Search = () => {
                 : { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr" }
             }
           >
-            {console.log(results)}
             {results?.map((result) => {
               return (
                 <PetCard

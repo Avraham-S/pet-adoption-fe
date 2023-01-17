@@ -17,10 +17,10 @@ export const Login = ({ toggleModal }) => {
   const login = async () => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/users/login",
+        process.env.REACT_APP_BASE_URL + "users/login",
         userInfo
       );
-      console.log(data);
+
       localStorage.setItem("token", JSON.stringify(data.token));
       setUser({ ...data });
       setIsLoggedIn(true);

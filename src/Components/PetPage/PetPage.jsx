@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useUser } from "../../Contexts/UserProvider";
 import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { useNavigate } from "react-router-dom";
-const PET_URL = "http://localhost:8080/pets/";
+const PET_URL = process.env.REACT_APP_BASE_URL + "pets/";
 export const PetPage = () => {
   const [pet, setPet] = useState();
   const [user] = useUser();
@@ -17,19 +17,26 @@ export const PetPage = () => {
 
   const getPetData = async () => {
     const { data } = await axios.get(PET_URL + id);
-    console.log(data);
+
     setPet(data[0]);
-    console.log(pet);
   };
 
   const renderButtons = () => {
     if (pet.adoptionStatus === "available")
       return (
         <>
-          <button value="adopt" onClick={handleAdoptPet}>
+          <button
+            value="adopt"
+            onClick={handleAdoptPet}
+            className="button-style"
+          >
             Adopt
           </button>
-          <button value="foster" onClick={handleAdoptPet}>
+          <button
+            value="foster"
+            onClick={handleAdoptPet}
+            className="button-style"
+          >
             Foster
           </button>
         </>
@@ -38,10 +45,18 @@ export const PetPage = () => {
     if (pet.adoptionStatus === "fostered")
       return (
         <>
-          <button value="adopt" onClick={handleAdoptPet}>
+          <button
+            value="adopt"
+            onClick={handleAdoptPet}
+            className="button-style"
+          >
             Adopt
           </button>
-          <button value="return" onClick={handleAdoptPet}>
+          <button
+            value="return"
+            onClick={handleAdoptPet}
+            className="button-style"
+          >
             Return
           </button>
         </>
@@ -49,7 +64,11 @@ export const PetPage = () => {
 
     if (pet.adoptionStatus === "adopted")
       return (
-        <button value="return" onClick={handleAdoptPet}>
+        <button
+          value="return"
+          onClick={handleAdoptPet}
+          className="button-style"
+        >
           Return
         </button>
       );
@@ -62,6 +81,7 @@ export const PetPage = () => {
           onClick={() => {
             navigate(`/editPet/?id=${pet.petId}`);
           }}
+          className="button-style"
         >
           Edit
         </button>
@@ -69,18 +89,12 @@ export const PetPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   console.log(isUsersPet);
-  //   if (!isLoggedIn) navigate("/home");
-  // });
-
   useEffect(() => {
     getPetData();
   }, []);
 
   useEffect(() => {
     if (pet) setIsUsersPet(pet.ownerId === user.id);
-    console.log(isUsersPet);
   }, [pet]);
 
   const requestAdoption = async (type) => {
@@ -112,12 +126,25 @@ export const PetPage = () => {
 
   if (!pet) return;
   return (
-    <div id="pet-page-container">
-      <img
-        src={pet.picture}
-        alt=""
-        style={{ height: "10rem", width: "20rem", borderColor: "white" }}
-      />
+    <div
+      id="pet-page-container"
+      style={pet.picture ? {} : { gridTemplateColumns: "1fr" }}
+    >
+      {pet.picture && (
+        <>
+          <div
+            style={{
+              backgroundImage: `url(${pet.picture})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              height: "20rem",
+              borderRadius: "5px",
+              boxShadow: "0 0 5px",
+            }}
+          ></div>
+        </>
+      )}
       <div id="pet-details">
         <div className="pet-detail">
           Name: <span>{pet.name}</span>
@@ -138,9 +165,6 @@ export const PetPage = () => {
           Color: <span>{pet.color}</span>
         </div>
         <div className="pet-detail">
-          Bio: <span>{pet.bio}</span>
-        </div>
-        <div className="pet-detail">
           Hypoalergenic: <span>{pet.hypoalergenic ? "yes" : "no"}</span>
         </div>
         <div className="pet-detail">
@@ -149,13 +173,18 @@ export const PetPage = () => {
         <div className="pet-detail">
           Breed: <span>{pet.breed}</span>
         </div>
-      </div>
-      {isLoggedIn && (
-        <div>
-          {renderButtons()}
-          {renderEditButton()}
+        <div className="pet-detail">
+          Bio: <span>{pet.bio}</span>
         </div>
-      )}
+        {isLoggedIn && (
+          <div
+            style={{ display: "flex", gap: "1rem", justifyContent: "center" }}
+          >
+            {renderButtons()}
+            {renderEditButton()}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

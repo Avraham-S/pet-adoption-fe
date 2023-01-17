@@ -9,7 +9,7 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../Contexts/UserProvider";
 
-const PET_URL = "http://localhost:8080/pets/";
+const PET_URL = process.env.REACT_APP_BASE_URL + "pets/";
 
 export const MyPetsPage = () => {
   const [petsList, setPetsList] = useState([]);
@@ -19,21 +19,18 @@ export const MyPetsPage = () => {
   const navigate = useNavigate();
 
   const getPetsList = async () => {
-    console.log(user);
     const pets = showSavedPets
       ? await axios.get(PET_URL + `save/${user.id}`)
       : await axios.get(PET_URL + `user/${user.id}`);
-    console.log(pets);
+
     if (showSavedPets) {
       const filtered = pets.data.filter((pet) => {
-        console.log(pet.userId, user.id);
         return pet.userId === user.id;
       });
-      console.log(filtered);
+
       setPetsList(filtered);
     } else setPetsList(pets.data);
   };
-  // ("http://localhost:8080/pets/648d6fbd-cc3f-4049-93c7-6320c1dcdad0");
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");

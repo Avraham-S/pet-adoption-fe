@@ -25,12 +25,11 @@ import { ProfilePage } from "./Components/ProfilePage/ProfilePage";
 function App() {
   const signupRef = useRef();
   const loginRef = useRef();
-  // const navigate = useNavigate();
+
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const toggleModal = () => {
     setIsOpenModal(!isOpenModal);
-    // navigate("/home");
   };
 
   return (

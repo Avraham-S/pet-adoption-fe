@@ -21,7 +21,6 @@ export const ProfileSettings = () => {
 
   useEffect(() => {
     if (!isLoggedIn) navigate("/home");
-    // console.log("set userUpdate", userUpdate);
   });
 
   useEffect(() => {
@@ -35,9 +34,8 @@ export const ProfileSettings = () => {
   const getUserInfo = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:8080/users/${currentUser.id}`
+        `${process.env.REACT_APP_BASE_URL}users/${currentUser.id}`
       );
-      console.log("got data", data);
       setUserInfo(data);
       setUserUpdate(data);
     } catch (error) {
@@ -47,21 +45,18 @@ export const ProfileSettings = () => {
 
   const updateUser = async (id) => {
     try {
-      console.log("frontend", userUpdate);
-      console.log(id);
       const token = JSON.parse(localStorage.getItem("token"));
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const { data } = await axios.put(
-        `http://localhost:8080/users/updateUser/${
+        `${process.env.REACT_APP_BASE_URL}users/updateUser/${
           showUpdatePassword ? "password/" : ""
         }${id}`,
         userUpdate,
         headersConfig
       );
-      console.log(data);
     } catch (error) {
-      console.log(error.response);
+      console.error(error.response);
     }
   };
 

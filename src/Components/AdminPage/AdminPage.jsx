@@ -33,7 +33,7 @@ export const AdminPage = () => {
 
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const { data } = await axios.get(
-        "http://localhost:8080/users",
+        process.env.REACT_APP_BASE_URL + "users",
         headersConfig
       );
       setUserList(data);
@@ -48,7 +48,7 @@ export const AdminPage = () => {
       const token = JSON.parse(localStorage.getItem("token"));
       const headersConfig = { headers: { Authorization: `Bearer ${token}` } };
       const user = await axios.put(
-        "http://localhost:8080/users/toggleAdmin",
+        process.env.REACT_APP_BASE_URL + "users/toggleAdmin",
         { id },
         headersConfig
       );
@@ -64,9 +64,8 @@ export const AdminPage = () => {
       const button = e.target;
       const userId = button.dataset.id;
       const user = await toggleAdmin(userId);
-      console.log(user);
+
       await getAllUsers();
-      console.log(userList);
     } catch (error) {
       console.error(error);
     }
@@ -74,7 +73,9 @@ export const AdminPage = () => {
 
   const getUsersPets = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/pets/user/${id}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}pets/user/${id}`
+      );
       setPetsList(data);
     } catch (error) {
       console.error(error);
@@ -83,9 +84,10 @@ export const AdminPage = () => {
 
   const getFullUserInfo = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/users/${id}`);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}users/${id}`
+      );
       setUserInfo(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     }

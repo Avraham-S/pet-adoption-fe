@@ -14,7 +14,6 @@ export const Header = ({ signupRef, loginRef, toggleModal }) => {
   const location = useLocation();
 
   const navigateHome = (route) => {
-    // if (location.pathname !== "/home")
     navigate(`/home/${route}`);
     toggleModal();
   };
