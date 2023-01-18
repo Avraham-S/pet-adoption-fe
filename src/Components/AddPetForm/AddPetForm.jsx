@@ -8,10 +8,9 @@ import { useLoggedIn } from "../../Contexts/LoggedInProvider";
 import { uploadPhoto } from "../../resources/helpers";
 import "./AddPetForm.css";
 
-const PET_URL = process.env.REACT_APP_BASE_URL;
+const PET_URL = process.env.REACT_APP_BASE_URL + "pets";
 
 export const AddPetForm = (props) => {
-  console.log(process.env.REACT_APP_BASE_URL);
   const [petInfo, setPetInfo] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useLoggedIn();
   const [defaultInfo, setDefaultInfo] = useState({});
